@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Permissões mínimas da janela principal. O frontend não tem acesso a shell, sistema de ficheiros nem processos; o backend é gerido apenas pelo código Rust.",
+  "windows": ["main"],
+  "permissions": ["core:default", "notification:default"]
+}

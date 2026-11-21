@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<title>UANJI CORE — Núcleo Ciano</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#04080f}
+a{color:#67e8f9}a:hover{color:#cffafe}
+.glass{background:rgba(12,28,44,.72);border:1px solid rgba(103,232,249,.32);border-radius:14px;box-shadow:0 0 0 1px rgba(2,6,14,.6),0 18px 40px -24px rgba(34,211,238,.55);backdrop-filter:blur(8px)}
+.ring{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,1fr);gap:28px 40px;position:relative}
+@media (max-width:980px){.ring{grid-template-columns:minmax(0,1fr)}.links{display:none}}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; box-sizing: border-box; background: radial-gradient(900px 600px at 50% 48%, #0b2433 0%, #04080f 70%); color: #e6f6fb; font-family: 'Sora', system-ui, sans-serif; padding: 20px 24px 32px">
+  <div style="max-width: 1440px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px">
+    <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px">
+      <div style="font-weight: 700; letter-spacing: 0.24em; font-size: 15px; color: #cffafe">UANJI CORE</div>
+      <nav aria-label="Espaços de trabalho" style="display: flex; flex-wrap: wrap; gap: 6px; margin-left: 10px">
+        <a href="#" style="text-decoration: none; padding: 7px 14px; border-radius: 999px; background: rgba(34,211,238,.16); border: 1px solid #22d3ee; color: #cffafe; font-size: 13px">Q360</a>
+        <a href="#" style="text-decoration: none; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(103,232,249,.25); color: #a5c9d6; font-size: 13px">EYK</a>
+        <a href="#" style="text-decoration: none; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(103,232,249,.25); color: #a5c9d6; font-size: 13px">Gestão Escolar</a>
+        <a href="#" style="text-decoration: none; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(103,232,249,.25); color: #a5c9d6; font-size: 13px">LGA Vision</a>
+      </nav>
+      <button type="button" style="margin-left: auto; min-width: 300px; display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(103,232,249,.35); background: rgba(8,20,32,.8); color: #a5c9d6; font-size: 13px; font-family: inherit; cursor: pointer">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#67e8f9" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+        Procurar projectos, ficheiros, fluxos…
+        <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #67e8f9">⌘K</span>
+      </button>
+    </header>
+
+    <div class="ring">
+      <svg class="links" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none">
+        <g stroke="#22d3ee" stroke-opacity=".45" stroke-width="1.4" fill="none">
+          <path d="M500 350 C 380 300, 300 160, 230 130"></path><path d="M500 350 C 380 380, 300 470, 230 520"></path>
+          <path d="M500 350 C 620 300, 700 160, 770 130"></path><path d="M500 350 C 620 380, 700 470, 770 520"></path>
+          <path d="M500 350 L 500 70"></path><path d="M500 350 L 500 640"></path>
+        </g>
+      </svg>
+
+      <!-- Coluna esquerda -->
+      <div style="display: flex; flex-direction: column; gap: 28px; position: relative">
+        <section class="glass" aria-label="Espaços de trabalho por projecto" style="padding: 16px 18px">
+          <h2 style="margin: 0 0 10px; font-size: 12px; letter-spacing: 0.2em; color: #67e8f9">01 · ESPAÇOS</h2>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; font-size: 12.5px">
+            <div style="padding: 10px; border-radius: 10px; background: rgba(34,211,238,.12); border: 1px solid rgba(34,211,238,.5)"><b>Q360</b><br><span style="color: #a5c9d6">11 tarefas · 62%</span></div>
+            <div style="padding: 10px; border-radius: 10px; border: 1px solid rgba(103,232,249,.2)"><b>EYK</b><br><span style="color: #a5c9d6">4 tarefas · 80%</span></div>
+            <div style="padding: 10px; border-radius: 10px; border: 1px solid rgba(103,232,249,.2)"><b>Gestão Escolar</b><br><span style="color: #a5c9d6">em pausa</span></div>
+            <div style="padding: 10px; border-radius: 10px; border: 1px solid rgba(103,232,249,.2)"><b>LGA Vision</b><br><span style="color: #a5c9d6">1 bloqueio</span></div>
+          </div>
+        </section>
+        <section class="glass" aria-label="Automação visual" style="padding: 16px 18px">
+          <h2 style="margin: 0 0 12px; font-size: 12px; letter-spacing: 0.2em; color: #67e8f9">02 · AUTOMAÇÃO</h2>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px">
+            <div style="display: flex; align-items: center; gap: 8px"><span style="padding: 5px 9px; border-radius: 8px; background: rgba(34,211,238,.15); border: 1px solid #22d3ee">Gatilho · todos os dias 08:00</span></div>
+            <div aria-hidden="true" style="margin-left: 18px; width: 1px; height: 10px; background: #22d3ee"></div>
+            <div><span style="padding: 5px 9px; border-radius: 8px; border: 1px solid rgba(103,232,249,.4)">Condição · há tarefas atrasadas</span></div>
+            <div aria-hidden="true" style="margin-left: 18px; width: 1px; height: 10px; background: #22d3ee"></div>
+            <div><span style="padding: 5px 9px; border-radius: 8px; border: 1px solid rgba(103,232,249,.4)">Acção · resumo por voz + notificação</span></div>
+            <div aria-hidden="true" style="margin-left: 18px; width: 1px; height: 10px; background: #22d3ee"></div>
+            <div><span style="padding: 5px 9px; border-radius: 8px; border: 1px solid #34d399; color: #a7f3d0">Resultado · entregue às 08:00</span></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Núcleo -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 22px; position: relative">
+        <section class="glass" aria-label="Assistente" style="padding: 10px 16px; font-size: 13px; text-align: center; max-width: 420px">
+          <span style="color: #67e8f9; font-size: 11px; letter-spacing: 0.2em">UAJI</span><br>«Tem uma reunião às 11:00 e o PR #12 está pronto para revisão.»
+        </section>
+        <div style="position: relative; width: 340px; max-width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center">
+          <svg viewBox="0 0 340 340" width="100%" height="100%" role="img" aria-label="Núcleo UANJI: à espera de UAJI" style="position: absolute; inset: 0">
+            <defs><radialGradient id="cg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#a5f3fc" stop-opacity=".95"></stop><stop offset="35%" stop-color="#22d3ee" stop-opacity=".35"></stop><stop offset="100%" stop-color="#22d3ee" stop-opacity="0"></stop></radialGradient></defs>
+            <circle cx="170" cy="170" r="150" fill="url(#cg)"></circle>
+            <g fill="none" stroke="#67e8f9" stroke-width="1.2">
+              <ellipse cx="170" cy="170" rx="120" ry="48" transform="rotate(25 170 170)"></ellipse>
+              <ellipse cx="170" cy="170" rx="120" ry="48" transform="rotate(-35 170 170)"></ellipse>
+              <ellipse cx="170" cy="170" rx="120" ry="48" transform="rotate(85 170 170)"></ellipse>
+              <circle cx="170" cy="170" r="138" stroke-opacity=".35" stroke-dasharray="2 8"></circle>
+            </g>
+            <circle cx="170" cy="170" r="16" fill="#ecfeff"></circle>
+          </svg>
+        </div>
+        <div style="text-align: center; font-size: 12px; letter-spacing: 0.24em; color: #67e8f9">À ESPERA DE «UAJI»</div>
+        <section class="glass" aria-label="Command Palette" style="padding: 12px 16px; width: min(100%, 460px)">
+          <div style="display: flex; justify-content: space-between; font-size: 12px; letter-spacing: 0.2em; color: #67e8f9; margin-bottom: 8px"><span>05 · COMANDOS</span><span style="font-family: 'IBM Plex Mono', monospace">⌘K</span></div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+            <span style="padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(103,232,249,.35)">+ tarefa</span>
+            <span style="padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(103,232,249,.35)">abrir ficheiro</span>
+            <span style="padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(103,232,249,.35)">executar fluxo</span>
+            <span style="padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(103,232,249,.35)">ir para EYK</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- Coluna direita -->
+      <div style="display: flex; flex-direction: column; gap: 28px; position: relative">
+        <section class="glass" aria-label="Centro de desempenho" style="padding: 16px 18px">
+          <h2 style="margin: 0 0 12px; font-size: 12px; letter-spacing: 0.2em; color: #67e8f9">03 · DESEMPENHO</h2>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; text-align: center">
+            <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #cffafe">2,4 d</div><div style="font-size: 10.5px; color: #a5c9d6">ciclo médio</div></div>
+            <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #fda4af">3</div><div style="font-size: 10.5px; color: #a5c9d6">bloqueadas</div></div>
+            <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #cffafe">7</div><div style="font-size: 10.5px; color: #a5c9d6">interrupções/dia</div></div>
+          </div>
+          <svg viewBox="0 0 260 60" width="100%" height="60" aria-hidden="true" style="margin-top: 12px"><polyline points="0,48 40,42 80,44 120,30 160,34 200,18 260,8" fill="none" stroke="#22d3ee" stroke-width="2"></polyline><polyline points="0,52 40,50 80,47 120,45 160,40 200,38 260,30" fill="none" stroke="#a5c9d6" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="4 4"></polyline></svg>
+          <div style="font-size: 10.5px; color: #a5c9d6">evolução semanal · concluídas vs. objectivo</div>
+        </section>
+        <section class="glass" aria-label="Integração com desenvolvimento" style="padding: 16px 18px">
+          <h2 style="margin: 0 0 10px; font-size: 12px; letter-spacing: 0.2em; color: #67e8f9">04 · GITHUB</h2>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 12.5px">
+            <li><span style="font-family: 'IBM Plex Mono', monospace; color: #67e8f9">a3f9c21</span> paginação por cursor → #41</li>
+            <li style="display: flex; justify-content: space-between"><span>PR #12 · auth JWT</span><span style="color: #a7f3d0">pronto</span></li>
+            <li style="display: flex; justify-content: space-between"><span>Issue #19 · erro 500</span><span style="color: #fda4af">aberta</span></li>
+            <li style="display: flex; justify-content: space-between"><span>v0.4.0 · release</span><span style="color: #a5c9d6">6 tarefas</span></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

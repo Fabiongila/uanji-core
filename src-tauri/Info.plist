@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- Mensagem do pedido de acesso ao microfone (o backend local herda a permissão da app). -->
+  <key>NSMicrophoneUsageDescription</key>
+  <string>O UANJI CORE usa o microfone para detectar a palavra de activação «UAJI» e transcrever os seus pedidos. O áudio é processado localmente neste Mac e não é guardado.</string>
+</dict>
+</plist>

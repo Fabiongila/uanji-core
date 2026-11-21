@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "UANJI CORE",
+  "version": "0.1.0",
+  "identifier": "com.uanji.core",
+  "build": {
+    "beforeDevCommand": "cd ../frontend 2>/dev/null || cd frontend; npm run dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "cd ../frontend 2>/dev/null || cd frontend; npm run build",
+    "frontendDist": "../frontend/dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "UANJI CORE",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 900,
+        "minHeight": 600,
+        "backgroundColor": "#050b16",
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:*; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "app",
+      "dmg"
+    ],
+    "category": "Productivity",
+    "shortDescription": "Centro de comando pessoal",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.png"
+    ],
+    "resources": {
+      "../backend/dist/uanji-backend/": "uanji-backend/"
+    },
+    "macOS": {
+      "minimumSystemVersion": "10.15"
+    }
+  }
+}

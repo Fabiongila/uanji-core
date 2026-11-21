@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<title>UANJI CORE — Ponte de Comando</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0e12}
+a{color:#8fb5ff}a:hover{color:#d3e2ff}
+.cut{clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);background:#2b3a52;padding:1px;box-sizing:border-box}
+.cut-in{clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);background:#12171e;height:100%;box-sizing:border-box;padding:16px 18px}
+.bridge{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,2fr) minmax(0,0.9fr);gap:18px}
+@media (max-width:980px){.bridge{grid-template-columns:minmax(0,1fr)}}
+.lbl{margin:0 0 10px;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.16em;color:#8fb5ff;font-weight:600}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; box-sizing: border-box; background: #0b0e12; color: #e7ecf3; font-family: 'IBM Plex Sans', system-ui, sans-serif; padding: 18px 22px 30px">
+  <div style="max-width: 1440px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; border-bottom: 1px solid #222c3a; padding-bottom: 14px">
+      <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.12em">UANJI<span style="color: #f5b942">·</span>CORE</div>
+      <label for="ws" style="font-size: 12px; color: #9aa7b8; margin-left: 12px">Espaço</label>
+      <select id="ws" style="background: #12171e; color: #e7ecf3; border: 1px solid #2b3a52; padding: 8px 10px; font-size: 13px; font-family: inherit">
+        <option>Q360 · Linha Saúde</option><option>EYK</option><option>Gestão Escolar</option><option>LGA Vision</option>
+      </select>
+      <div style="display: flex; gap: 4px; font-size: 13px">
+        <a href="#" style="padding: 8px 12px; text-decoration: none; color: #e7ecf3; border-bottom: 2px solid #4f8cff">Painel</a>
+        <a href="#" style="padding: 8px 12px; text-decoration: none; color: #9aa7b8">Tarefas</a>
+        <a href="#" style="padding: 8px 12px; text-decoration: none; color: #9aa7b8">Documentos</a>
+        <a href="#" style="padding: 8px 12px; text-decoration: none; color: #9aa7b8">Fluxos</a>
+        <a href="#" style="padding: 8px 12px; text-decoration: none; color: #9aa7b8">Código</a>
+        <a href="#" style="padding: 8px 12px; text-decoration: none; color: #9aa7b8">Métricas</a>
+      </div>
+      <button type="button" style="margin-left: auto; display: flex; align-items: center; gap: 10px; min-width: 260px; padding: 9px 12px; background: #12171e; border: 1px solid #2b3a52; color: #9aa7b8; font-size: 13px; font-family: inherit; cursor: pointer">Comando ou pesquisa <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; color: #f5b942">⌘K</span></button>
+    </header>
+
+    <div class="bridge">
+      <div style="display: flex; flex-direction: column; gap: 18px">
+        <section class="cut" aria-label="Espaços de trabalho"><div class="cut-in">
+          <h2 class="lbl">01 · ESPAÇOS</h2>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 13px">
+            <li style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 4px; height: 26px; background: #4f8cff"></span><span style="flex: 1">Q360 · Linha Saúde</span><span style="font-family: 'IBM Plex Mono', monospace; color: #8fb5ff">62%</span></li>
+            <li style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 4px; height: 26px; background: #2b3a52"></span><span style="flex: 1">EYK</span><span style="font-family: 'IBM Plex Mono', monospace; color: #9aa7b8">80%</span></li>
+            <li style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 4px; height: 26px; background: #2b3a52"></span><span style="flex: 1">Gestão Escolar</span><span style="font-family: 'IBM Plex Mono', monospace; color: #9aa7b8">pausa</span></li>
+            <li style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 4px; height: 26px; background: #f5b942"></span><span style="flex: 1">LGA Vision</span><span style="font-family: 'IBM Plex Mono', monospace; color: #f5b942">bloqueio</span></li>
+          </ul>
+        </div></section>
+        <section class="cut" aria-label="Centro de desempenho" style="flex: 1"><div class="cut-in">
+          <h2 class="lbl">03 · DESEMPENHO</h2>
+          <dl style="margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 10px; font-size: 13px">
+            <dt style="color: #9aa7b8">Ciclo (início → fim)</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace">2,4 d</dd>
+            <dt style="color: #9aa7b8">Tarefas bloqueadas</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace; color: #f5b942">3</dd>
+            <dt style="color: #9aa7b8">Interrupções / dia</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace">7</dd>
+            <dt style="color: #9aa7b8">Foco registado (sem.)</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace">11 h</dd>
+          </dl>
+          <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; margin-top: 14px; align-items: end; height: 70px">
+            <div style="height: 35%; background: #2b3a52"></div><div style="height: 50%; background: #2b3a52"></div><div style="height: 42%; background: #2b3a52"></div><div style="height: 64%; background: #355a9c"></div><div style="height: 58%; background: #355a9c"></div><div style="height: 80%; background: #4f8cff"></div><div style="height: 95%; background: #8fb5ff"></div>
+          </div>
+        </div></section>
+      </div>
+
+      <!-- 02 Editor de fluxos ao centro -->
+      <section class="cut" aria-label="Automação visual"><div class="cut-in" style="padding: 18px 20px; background-color: #0f141a; background-image: radial-gradient(#243044 1px, transparent 1px); background-size: 18px 18px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 18px">
+          <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px">02 · PR aprovado → tarefa concluída</h1>
+          <span style="font-size: 11px; padding: 3px 8px; border: 1px solid #355a9c; color: #8fb5ff">evento · GitHub</span>
+          <button type="button" style="margin-left: auto; padding: 8px 14px; background: #4f8cff; color: #0b0e12; border: 0; font-weight: 600; font-family: inherit; cursor: pointer">Executar agora</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px; align-items: center; position: relative">
+          <div style="border: 1px solid #4f8cff; background: #141c28; padding: 12px; font-size: 12.5px"><div style="font-size: 10.5px; letter-spacing: .14em; color: #8fb5ff">GATILHO</div>Pull request aprovado<div style="color: #9aa7b8; margin-top: 4px">repo q360-backend</div></div>
+          <div style="border: 1px solid #2b3a52; background: #141c28; padding: 12px; font-size: 12.5px"><div style="font-size: 10.5px; letter-spacing: .14em; color: #8fb5ff">CONDIÇÃO</div>Título contém #tarefa<div style="color: #9aa7b8; margin-top: 4px">e branch = main</div></div>
+          <div style="border: 1px solid #2b3a52; background: #141c28; padding: 12px; font-size: 12.5px"><div style="font-size: 10.5px; letter-spacing: .14em; color: #8fb5ff">ACÇÃO</div>Concluir tarefa ligada<div style="color: #9aa7b8; margin-top: 4px">+ nota no projecto</div></div>
+          <div style="border: 1px solid #3fb27f; background: #11201a; padding: 12px; font-size: 12.5px"><div style="font-size: 10.5px; letter-spacing: .14em; color: #7dd8ab">RESULTADO</div>Tarefa #41 concluída<div style="color: #9aa7b8; margin-top: 4px">há 12 min · 1,2 s</div></div>
+        </div>
+        <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px; margin-top: -40px; pointer-events: none">
+          <div style="border-top: 1px solid #4f8cff; margin: 0 -26px 0 100%"></div><div style="border-top: 1px solid #4f8cff; margin: 0 -26px 0 100%"></div><div style="border-top: 1px solid #4f8cff; margin: 0 -26px 0 100%"></div><div></div>
+        </div>
+        <div style="margin-top: 52px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; font-size: 12.5px">
+          <div style="border: 1px dashed #2b3a52; padding: 12px"><b>Manual</b><br><span style="color: #9aa7b8">botão, ⌘K ou voz</span></div>
+          <div style="border: 1px dashed #2b3a52; padding: 12px"><b>Agendado</b><br><span style="color: #9aa7b8">cron · todos os dias 08:00</span></div>
+          <div style="border: 1px dashed #4f8cff; padding: 12px"><b>Evento externo</b><br><span style="color: #9aa7b8">GitHub, webhook, calendário</span></div>
+        </div>
+        <div style="margin-top: 18px; font-size: 12px; color: #9aa7b8">Histórico: 14 execuções · 13 concluídas · 1 falhada (token expirado)</div>
+      </div></section>
+
+      <div style="display: flex; flex-direction: column; gap: 18px">
+        <section class="cut" aria-label="Integração com desenvolvimento"><div class="cut-in">
+          <h2 class="lbl">04 · CÓDIGO</h2>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 12.5px">
+            <li><span style="font-family: 'IBM Plex Mono', monospace; color: #f5b942">feature/pagination</span> · 3 commits</li>
+            <li><span style="font-family: 'IBM Plex Mono', monospace; color: #8fb5ff">a3f9c21</span> paginação por cursor → #41</li>
+            <li style="display: flex; justify-content: space-between"><span>PR #12 auth JWT</span><span style="color: #7dd8ab">aprovado</span></li>
+            <li style="display: flex; justify-content: space-between"><span>Issue #19 erro 500</span><span style="color: #f5b942">aberta</span></li>
+            <li style="display: flex; justify-content: space-between"><span>Release v0.4.0</span><span style="color: #9aa7b8">6 tarefas</span></li>
+          </ul>
+        </div></section>
+        <section class="cut" aria-label="Assistente"><div class="cut-in">
+          <h2 class="lbl">UAJI</h2>
+          <p style="margin: 0; font-size: 13px; line-height: 1.5">«O PR #12 foi aprovado e a tarefa de autenticação ficou concluída. Quer que actualize a versão v0.4?»</p>
+          <div style="display: flex; gap: 8px; margin-top: 10px"><button type="button" style="padding: 8px 12px; background: #4f8cff; border: 0; color: #0b0e12; font-weight: 600; font-family: inherit; cursor: pointer">Sim</button><button type="button" style="padding: 8px 12px; background: transparent; border: 1px solid #2b3a52; color: #e7ecf3; font-family: inherit; cursor: pointer">Agora não</button></div>
+        </div></section>
+        <section class="cut" aria-label="Command Palette" style="flex: 1"><div class="cut-in">
+          <h2 class="lbl">05 · COMANDOS</h2>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; font-size: 12.5px; color: #c9d3e0">
+            <li>⌘K → «tarefa Rever PR !alta @amanhã»</li><li>⌘K → «fluxo Deploy de teste»</li><li>⌘K → «abrir src/api/auth.py»</li><li>⌘1…⌘4 → mudar de espaço</li>
+          </ul>
+        </div></section>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

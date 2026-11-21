@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UANJI CORE — Protótipo interactivo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#000}
+a{color:#ffc86b}a:hover{color:#ffe2a8}
+.hot{position:absolute;background:transparent;border:0;border-radius:14px;cursor:pointer;padding:0;transition:box-shadow .25s,transform .25s}
+.hot:hover,.hot:focus-visible{box-shadow:0 0 0 1px rgba(255,200,107,.75),0 0 34px rgba(255,170,40,.45);outline:none}
+.mini{position:absolute;box-sizing:border-box;border-radius:10px;border:1px solid rgba(255,190,90,.55);background:linear-gradient(160deg,rgba(90,56,10,.55),rgba(28,16,4,.7));box-shadow:0 0 24px rgba(255,160,30,.18),inset 0 1px 0 rgba(255,220,150,.25);color:#fbead0;font-family:Inter,sans-serif;text-align:left;cursor:pointer;padding:9px 11px;transition:box-shadow .25s,border-color .25s}
+.mini:hover,.mini:focus-visible{border-color:#ffc86b;box-shadow:0 0 34px rgba(255,170,40,.45);outline:none}
+.dots{display:flex;gap:5px}.dots i{width:8px;height:8px;border-radius:50%;display:block}
+.pane{border:1px solid rgba(255,190,90,.35);border-radius:10px;background:rgba(255,190,90,.06);padding:12px}
+.k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#d8b98a}
+</style>
+
+<style>
+html,body{height:100%}
+body{display:flex;align-items:center;justify-content:center;overflow:hidden}
+#stage{position:relative;width:1440px;height:805px;overflow:hidden;background:#000;font-family:Inter,sans-serif;color:#fbead0;transform-origin:center center;flex-shrink:0}
+#base{position:absolute;inset:0;transition:transform 560ms ease,filter 560ms ease}
+#stage.open #base{transform:scale(.96);filter:brightness(.4) blur(1.5px)}
+#veil{position:absolute;inset:0;z-index:20;border:0;padding:0;cursor:default;background:rgba(0,0,0,0);transition:background 560ms ease;pointer-events:none}
+#stage.open #veil{pointer-events:auto}
+#stage.shown #veil{background:rgba(0,0,0,.35)}
+#flyer{position:absolute;left:250px;top:70px;width:940px;height:665px;z-index:30;transform-origin:0 0;transition:transform 560ms cubic-bezier(.2,.8,.2,1),box-shadow 560ms;border-radius:16px;box-shadow:0 0 0 1px rgba(255,190,90,.55),0 40px 90px rgba(0,0,0,.6)}
+#stage.shown #flyer{box-shadow:0 0 0 1px rgba(255,190,90,.55),0 0 80px rgba(255,160,30,.35),0 40px 90px rgba(0,0,0,.6)}
+#crop{position:absolute;inset:0;width:100%;height:100%;border-radius:16px;opacity:1;transition:opacity 260ms ease 300ms}
+#stage.shown #crop{opacity:0;transition-delay:220ms}
+#detail{position:absolute;inset:0;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,rgba(74,46,8,.94),rgba(20,12,3,.96));opacity:0;transition:opacity 280ms ease}
+#flyer.nocrop #detail{opacity:.7}
+#stage.shown #detail{opacity:1;transition-delay:260ms}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="base">
+    <img src="img/base.png" alt="UANJI CORE: núcleo dourado com os painéis Métricas, Agenda, Automações, Tarefas, Projectos e Assistente" style="position:absolute;inset:0;width:1440px;height:805px;display:block">
+    <div id="hots"></div>
+  </div>
+  <button type="button" id="veil" aria-label="Fechar e voltar ao painel"></button>
+  <div id="flyer" role="dialog" hidden>
+    <img id="crop" src="" alt="">
+    <div id="detail">
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(255,190,90,.3)">
+        <span class="dots" aria-hidden="true"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></span>
+        <h2 id="dtitle" style="margin:0;font-size:22px;font-weight:600;color:#ffe2a8"></h2>
+        <span id="dhint" style="font-size:12px;color:#d8b98a"></span>
+        <button type="button" id="closeBtn" aria-label="Fechar" style="margin-left:auto;width:34px;height:34px;border-radius:8px;border:1px solid rgba(255,190,90,.5);background:rgba(255,190,90,.08);color:#ffe2a8;font-size:16px;cursor:pointer">✕</button>
+      </div>
+      <div style="padding:18px;height:calc(100% - 64px);box-sizing:border-box;overflow:auto;font-size:13.5px">
+<div class="detail" data-id="metricas" hidden>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 14px">
+              <div class="pane"><div class="k">Tempo de foco · esta semana</div>
+                <svg viewBox="0 0 520 200" width="100%" height="220" aria-hidden="true"><path d="M0 170 C 60 150, 90 90, 150 110 S 240 60, 300 90 S 400 40, 460 70 L 520 60 L 520 200 L 0 200 Z" fill="rgba(255,180,58,.18)"></path><path d="M0 170 C 60 150, 90 90, 150 110 S 240 60, 300 90 S 400 40, 460 70 L 520 60" fill="none" stroke="#ffb43a" stroke-width="2.5"></path></svg>
+                <div style="display: flex; justify-content: space-between; color: #d8b98a; font-size: 12px"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 14px">
+                <div class="pane"><div class="k">Foco total</div><div style="font-size: 30px; font-weight: 700; color: #ffe2a8">18h 24m</div><div style="color: #8fe39b">↑ 12% vs semana anterior</div></div>
+                <div class="pane"><div class="k">Tarefas concluídas</div><div style="font-size: 30px; font-weight: 700; color: #ffe2a8">23</div></div>
+                <div class="pane"><div class="k">Por projecto</div><div>UANJI Web · 7h</div><div>App Mobile · 5h 40m</div><div>Investigação IA · 3h</div></div>
+              </div>
+            </div>
+</div>
+<div class="detail" data-id="agenda" hidden>
+            <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 14px">
+              <div class="pane"><div class="k">Hoje · quinta, 29</div>
+                <div style="display: grid; grid-template-columns: 56px 1fr; row-gap: 12px; margin-top: 10px">
+                  <span style="font-family: 'JetBrains Mono'">09:00</span><span>Planeamento <span style="color: #d8b98a">· 30 min</span></span>
+                  <span style="font-family: 'JetBrains Mono'">10:00</span><span>Foco: API <span style="color: #d8b98a">· bloco de 2 h</span></span>
+                  <span style="font-family: 'JetBrains Mono'">14:00</span><span>Revisão <span style="color: #d8b98a">· equipa</span></span>
+                  <span style="font-family: 'JetBrains Mono'">17:30</span><span>Revisão diária</span>
+                </div>
+              </div>
+              <div class="pane"><div class="k">Semana</div>
+                <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 10px; font-size: 12px">
+                  <div>Seg<div style="height: 120px; margin-top: 6px; border-radius: 6px; background: rgba(255,180,58,.18)"></div></div>
+                  <div>Ter<div style="height: 80px; margin-top: 6px; border-radius: 6px; background: rgba(255,180,58,.18)"></div></div>
+                  <div>Qua<div style="height: 150px; margin-top: 6px; border-radius: 6px; background: rgba(255,180,58,.3)"></div></div>
+                  <div style="color: #ffe2a8">Qui<div style="height: 170px; margin-top: 6px; border-radius: 6px; background: rgba(255,180,58,.55)"></div></div>
+                  <div>Sex<div style="height: 60px; margin-top: 6px; border-radius: 6px; background: rgba(255,180,58,.18)"></div></div>
+                </div>
+              </div>
+            </div>
+</div>
+<div class="detail" data-id="automacoes" hidden>
+            <div class="pane" style="background: rgba(255,190,90,.04); background-image: radial-gradient(rgba(255,190,90,.18) 1px, transparent 1px); background-size: 20px 20px; padding: 24px">
+              <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px; align-items: center">
+                <div class="pane" style="background: rgba(255,180,58,.14); text-align: center"><div style="font-size: 26px">⚡</div><b>Gatilho</b><div style="color: #d8b98a; font-size: 12px">PR aprovado no GitHub</div></div>
+                <div class="pane" style="text-align: center"><div style="font-size: 26px">⑂</div><b>Condição</b><div style="color: #d8b98a; font-size: 12px">título tem #tarefa</div></div>
+                <div class="pane" style="text-align: center"><div style="font-size: 26px">⚙</div><b>Acção</b><div style="color: #d8b98a; font-size: 12px">concluir tarefa</div></div>
+                <div class="pane" style="text-align: center; border-color: rgba(143,227,155,.6)"><div style="font-size: 26px">◎</div><b>Resultado</b><div style="color: #8fe39b; font-size: 12px">ok · há 12 min</div></div>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px">
+              <div class="pane"><b>Manual</b><div style="color: #d8b98a">botão, ⌘K ou voz</div></div>
+              <div class="pane"><b>Agendado</b><div style="color: #d8b98a">todos os dias às 08:00</div></div>
+              <div class="pane"><b>Evento externo</b><div style="color: #d8b98a">GitHub, webhook, calendário</div></div>
+            </div>
+</div>
+<div class="detail" data-id="tarefas" hidden>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+              <div class="pane"><div class="k">Por fazer · 3</div>
+                <div class="pane" style="margin-top: 10px">Corrigir bug de login<div style="color: #ff9d8a; font-size: 12px">alta · hoje</div></div>
+                <div class="pane" style="margin-top: 8px">Criar página de equipa<div style="color: #d8b98a; font-size: 12px">média</div></div>
+                <div class="pane" style="margin-top: 8px">Documentar endpoints<div style="color: #d8b98a; font-size: 12px">baixa</div></div>
+              </div>
+              <div class="pane"><div class="k">Em curso · 2</div>
+                <div class="pane" style="margin-top: 10px">Implementar API<div style="color: #d8b98a; font-size: 12px">UANJI Web · 60%</div></div>
+                <div class="pane" style="margin-top: 8px">Rever design<div style="color: #d8b98a; font-size: 12px">App Mobile</div></div>
+              </div>
+              <div class="pane"><div class="k">Concluído · 4</div>
+                <div class="pane" style="margin-top: 10px; color: #8fe39b">✓ Deploy em produção</div>
+                <div class="pane" style="margin-top: 8px; color: #8fe39b">✓ Testes finais</div>
+              </div>
+            </div>
+</div>
+<div class="detail" data-id="projectos" hidden>
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <div class="pane" style="display: grid; grid-template-columns: 1.4fr 3fr 60px 110px; gap: 14px; align-items: center"><b>UANJI Web</b><div style="height: 8px; border-radius: 4px; background: rgba(255,190,90,.15)"><div style="width: 80%; height: 100%; border-radius: 4px; background: #ffb43a"></div></div><span>80%</span><span style="color: #8fe39b">Activo</span></div>
+              <div class="pane" style="display: grid; grid-template-columns: 1.4fr 3fr 60px 110px; gap: 14px; align-items: center"><b>App Mobile</b><div style="height: 8px; border-radius: 4px; background: rgba(255,190,90,.15)"><div style="width: 45%; height: 100%; border-radius: 4px; background: #ffb43a"></div></div><span>45%</span><span style="color: #ffc86b">Em pausa</span></div>
+              <div class="pane" style="display: grid; grid-template-columns: 1.4fr 3fr 60px 110px; gap: 14px; align-items: center"><b>Marketing</b><div style="height: 8px; border-radius: 4px; background: rgba(255,190,90,.15)"><div style="width: 20%; height: 100%; border-radius: 4px; background: #ffb43a"></div></div><span>20%</span><span style="color: #8fe39b">Activo</span></div>
+              <div class="pane" style="display: grid; grid-template-columns: 1.4fr 3fr 60px 110px; gap: 14px; align-items: center"><b>Investigação IA</b><div style="height: 8px; border-radius: 4px; background: rgba(255,190,90,.15)"><div style="width: 60%; height: 100%; border-radius: 4px; background: #ffb43a"></div></div><span>60%</span><span style="color: #ffc86b">Em pausa</span></div>
+              <div class="k" style="margin-top: 8px">Cada projecto abre o seu espaço: tarefas, documentos, fluxos, código e métricas.</div>
+            </div>
+</div>
+<div class="detail" data-id="assistente" hidden>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 16px">
+              <svg viewBox="0 0 600 90" width="80%" height="90" aria-hidden="true"><g stroke="#ffb43a" stroke-width="3" stroke-linecap="round"><path d="M40 45v0M60 38v14M80 28v34M100 40v10M120 18v54M140 30v30M160 10v70M180 25v40M200 35v20M220 15v60M240 30v30M260 5v80M280 20v50M300 12v66M320 28v34M340 8v74M360 22v46M380 34v22M400 16v58M420 30v30M440 38v14M460 26v38M480 40v10M500 33v24M520 41v8M540 44v2"></path></g></svg>
+              <span style="padding: 8px 16px; border-radius: 999px; border: 1px solid #ffb43a; color: #ffe2a8">🎙 A ouvir</span>
+              <div style="width: 100%; display: flex; flex-direction: column; gap: 10px">
+                <div class="pane" style="align-self: flex-end; max-width: 70%">UAJI, quais são as minhas prioridades de hoje?</div>
+                <div class="pane" style="max-width: 80%; background: rgba(255,180,58,.12)">Tem 3 tarefas para hoje. A prioridade é «Corrigir bug de login», com prazo às 18:00. Quer que inicie uma sessão de foco?</div>
+                <div style="display: flex; gap: 8px"><span class="pane" style="padding: 6px 12px">Sim</span><span class="pane" style="padding: 6px 12px">Agora não</span></div>
+              </div>
+            </div>
+</div>
+<div class="detail" data-id="espacos" hidden>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+              <div class="pane" style="background: rgba(255,180,58,.14)"><div style="font-size: 18px; font-weight: 600; color: #ffe2a8">Q360 · Linha Saúde</div><div style="color: #d8b98a; margin-top: 4px">11 tarefas · 8 documentos · 3 fluxos · 2 repositórios</div><div style="margin-top: 10px; height: 6px; border-radius: 3px; background: rgba(255,190,90,.15)"><div style="width: 62%; height: 100%; background: #ffb43a; border-radius: 3px"></div></div></div>
+              <div class="pane"><div style="font-size: 18px; font-weight: 600; color: #ffe2a8">EYK</div><div style="color: #d8b98a; margin-top: 4px">4 tarefas · 5 documentos · 1 fluxo</div><div style="margin-top: 10px; height: 6px; border-radius: 3px; background: rgba(255,190,90,.15)"><div style="width: 80%; height: 100%; background: #ffb43a; border-radius: 3px"></div></div></div>
+              <div class="pane"><div style="font-size: 18px; font-weight: 600; color: #ffe2a8">Gestão Escolar</div><div style="color: #d8b98a; margin-top: 4px">em pausa · 6 tarefas</div><div style="margin-top: 10px; height: 6px; border-radius: 3px; background: rgba(255,190,90,.15)"><div style="width: 35%; height: 100%; background: #ffb43a; border-radius: 3px"></div></div></div>
+              <div class="pane"><div style="font-size: 18px; font-weight: 600; color: #ffe2a8">LGA Vision</div><div style="color: #ff9d8a; margin-top: 4px">1 bloqueio · dataset por validar</div><div style="margin-top: 10px; height: 6px; border-radius: 3px; background: rgba(255,190,90,.15)"><div style="width: 20%; height: 100%; background: #ffb43a; border-radius: 3px"></div></div></div>
+            </div>
+            <div class="k" style="margin-top: 14px">Ao entrar num espaço, os seis painéis passam a mostrar só esse projecto.</div>
+</div>
+<div class="detail" data-id="desempenho" hidden>
+            <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+              <div class="pane"><div class="k">Ciclo médio</div><div style="font-size: 26px; font-weight: 700; color: #ffe2a8">2,4 dias</div><div style="color: #d8b98a; font-size: 12px">início → conclusão</div></div>
+              <div class="pane"><div class="k">Bloqueadas</div><div style="font-size: 26px; font-weight: 700; color: #ff9d8a">3</div><div style="color: #d8b98a; font-size: 12px">há 4 dias em média</div></div>
+              <div class="pane"><div class="k">Interrupções</div><div style="font-size: 26px; font-weight: 700; color: #ffe2a8">7 / dia</div><div style="color: #d8b98a; font-size: 12px">mudanças de contexto</div></div>
+              <div class="pane"><div class="k">Semana</div><div style="font-size: 26px; font-weight: 700; color: #8fe39b">+18%</div><div style="color: #d8b98a; font-size: 12px">concluídas</div></div>
+            </div>
+            <div class="pane" style="margin-top: 14px"><div class="k">Progresso por objectivo</div>
+              <div style="margin-top: 10px; display: grid; grid-template-columns: 200px 1fr 50px; gap: 10px; align-items: center">
+                <span>API pública v1</span><div style="height: 8px; border-radius: 4px; background: rgba(255,190,90,.15)"><div style="width: 62%; height: 100%; background: #ffb43a; border-radius: 4px"></div></div><span>62%</span>
+                <span>Lançar app mobile</span><div style="height: 8px; border-radius: 4px; background: rgba(255,190,90,.15)"><div style="width: 45%; height: 100%; background: #ffb43a; border-radius: 4px"></div></div><span>45%</span>
+                <span>Piloto no hospital</span><div style="height: 8px; border-radius: 4px; background: rgba(255,190,90,.15)"><div style="width: 10%; height: 100%; background: #ffb43a; border-radius: 4px"></div></div><span>10%</span>
+              </div>
+            </div>
+</div>
+<div class="detail" data-id="github" hidden>
+            <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px">
+              <div class="pane"><div class="k">Commits · uanji-web</div>
+                <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 9px; font-size: 13px">
+                  <div><span style="font-family: 'JetBrains Mono'; color: #ffc86b">a3f9c21</span> feat: paginação por cursor <span style="color: #d8b98a">→ tarefa #41</span></div>
+                  <div><span style="font-family: 'JetBrains Mono'; color: #ffc86b">7be0d44</span> fix: validação do login <span style="color: #d8b98a">→ #38</span></div>
+                  <div><span style="font-family: 'JetBrains Mono'; color: #ffc86b">19c2e07</span> docs: endpoints da API</div>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <div class="pane"><div class="k">Pull requests</div><div style="margin-top: 6px">#12 auth JWT <span style="color: #8fe39b">· aprovado</span></div><div>#13 página de equipa <span style="color: #d8b98a">· em revisão</span></div></div>
+                <div class="pane"><div class="k">Issues e branches</div><div style="margin-top: 6px">#19 erro 500 no login <span style="color: #ff9d8a">· aberta</span></div><div style="font-family: 'JetBrains Mono'; font-size: 12px">feature/pagination · main · release/v0.4</div></div>
+                <div class="pane"><div class="k">Versão v0.4</div><div>6 de 7 tarefas ligadas concluídas</div></div>
+              </div>
+            </div>
+</div>
+<div class="detail" data-id="comandos" hidden>
+            <div class="pane" style="padding: 0; max-width: 640px; margin: 0 auto; background: rgba(28,16,4,.8)">
+              <div style="padding: 14px 16px; border-bottom: 1px solid rgba(255,190,90,.3); font-size: 16px; color: #ffe2a8">🔍 pag<span style="opacity: .5">|</span></div>
+              <div style="padding: 8px; display: flex; flex-direction: column; gap: 2px">
+                <div class="k" style="padding: 6px 10px">Tarefas</div>
+                <div style="padding: 8px 10px; border-radius: 6px; background: rgba(255,180,58,.18); display: flex; justify-content: space-between"><span>Definir <b>pag</b>inação e filtros</span><span>⏎</span></div>
+                <div style="padding: 8px 10px">+ Criar tarefa «pag…»</div>
+                <div class="k" style="padding: 6px 10px">Ficheiros</div>
+                <div style="padding: 8px 10px; font-family: 'JetBrains Mono'; font-size: 12.5px">src/api/<b>pag</b>ination.py</div>
+                <div class="k" style="padding: 6px 10px">Fluxos e comandos</div>
+                <div style="padding: 8px 10px">▶ Executar fluxo «Relatório de páginas lentas»</div>
+                <div style="padding: 8px 10px">⌘ Abrir projecto UANJI Web</div>
+              </div>
+              <div style="padding: 10px 16px; border-top: 1px solid rgba(255,190,90,.3); font-size: 11.5px; color: #d8b98a; font-family: 'JetBrains Mono'">↑↓ navegar · ⏎ abrir · ⌘⏎ executar</div>
+            </div>
+</div>
+<div class="detail" data-id="conhecimento" hidden>
+            <div style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 14px">
+              <div class="pane"><div class="k">Notas recentes</div>
+                <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 8px"><div>💡 Usar cache na API <span style="color: #d8b98a">· ideia</span></div><div>⚖ Escolha do JWT <span style="color: #d8b98a">· decisão</span></div><div>🐞 Erro CUDA no treino <span style="color: #d8b98a">· solução</span></div><div>📄 Arquitectura v2 <span style="color: #d8b98a">· documentação</span></div></div>
+              </div>
+              <div class="pane" style="position: relative; min-height: 300px"><div class="k">Ligações</div>
+                <svg viewBox="0 0 400 260" width="100%" height="260" aria-hidden="true"><g stroke="rgba(255,190,90,.6)"><line x1="200" y1="130" x2="90" y2="60"></line><line x1="200" y1="130" x2="320" y2="70"></line><line x1="200" y1="130" x2="100" y2="210"></line><line x1="200" y1="130" x2="310" y2="200"></line></g><g fill="#ffb43a"><circle cx="200" cy="130" r="9"></circle><circle cx="90" cy="60" r="6"></circle><circle cx="320" cy="70" r="6"></circle><circle cx="100" cy="210" r="6"></circle><circle cx="310" cy="200" r="6"></circle></g><g fill="#fbead0" font-size="12" font-family="Inter"><text x="212" y="134">Arquitectura v2</text><text x="40" y="48">Escolha do JWT</text><text x="270" y="58">UANJI Web</text><text x="50" y="232">Cache na API</text><text x="260" y="226">Tarefa #41</text></g></svg>
+              </div>
+            </div>
+</div>
+<div class="detail" data-id="actividade" hidden>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+              <div class="pane"><div class="k">Agora</div><div style="font-size: 20px; font-weight: 600; color: #ffe2a8">Visual Studio Code</div><div style="color: #d8b98a">pasta uanji-web · há 42 min</div></div>
+              <div class="pane"><div class="k">Hoje</div><div style="font-size: 20px; font-weight: 600; color: #ffe2a8">5 h 12 min</div><div style="color: #d8b98a">activo desde as 08:47</div></div>
+              <div class="pane"><div class="k">Hábito</div><div style="font-size: 20px; font-weight: 600; color: #ffe2a8">09:00–11:00</div><div style="color: #d8b98a">as suas horas mais intensas</div></div>
+            </div>
+            <div class="pane" style="margin-top: 12px"><div class="k">Por aplicação</div>
+              <div style="margin-top: 8px; display: grid; grid-template-columns: 160px 1fr 70px; gap: 8px; align-items: center">
+                <span>VS Code</span><div style="height: 8px; background: rgba(255,190,90,.15); border-radius: 4px"><div style="width: 75%; height: 100%; background: #ffb43a; border-radius: 4px"></div></div><span>2 h 40</span>
+                <span>Chrome</span><div style="height: 8px; background: rgba(255,190,90,.15); border-radius: 4px"><div style="width: 34%; height: 100%; background: #ffb43a; border-radius: 4px"></div></div><span>1 h 10</span>
+                <span>WhatsApp</span><div style="height: 8px; background: rgba(255,190,90,.15); border-radius: 4px"><div style="width: 12%; height: 100%; background: #ffb43a; border-radius: 4px"></div></div><span>25 min</span>
+              </div>
+            </div>
+            <div class="k" style="margin-top: 10px">Só local · sem teclas, conteúdo ou capturas · pode desligar a qualquer momento</div>
+</div>
+<div class="detail" data-id="definicoes" hidden>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+              <div class="pane"><div class="k">Voz e personalidade</div><div style="margin-top: 6px">Voz: Joana (feminina, pt-PT)</div><div>Palavra de activação: «UAJI»</div><div>Tratamento: neutro</div></div>
+              <div class="pane"><div class="k">Iniciativa do assistente</div><div style="margin-top: 6px">Frequência: normal (20 min)</div><div>Falar em voz alta: sim</div><div>Silêncio: 22:00 – 07:00</div></div>
+              <div class="pane"><div class="k">Aparência</div><div style="margin-top: 6px">Tema: Âmbar dourado</div><div>Disposição: adaptativa</div></div>
+              <div class="pane"><div class="k">Sistema e privacidade</div><div style="margin-top: 6px">Abrir aplicações: sim</div><div>Comandos de terminal: desligados</div><div>Monitor de actividade: ligado</div></div>
+            </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const S = 1440 / 1088;
+const px = b => ({l: Math.round(b[0]*S), t: Math.round(b[1]*S), w: Math.round((b[2]-b[0])*S), h: Math.round((b[3]-b[1])*S)});
+const originals = [
+  {id:'metricas', label:'Métricas', hint:'tempo de foco e evolução', crop:'img/metricas.png', box:[208,72,412,242]},
+  {id:'agenda', label:'Agenda', hint:'compromissos e blocos de trabalho', crop:'img/agenda.png', box:[124,218,302,347]},
+  {id:'automacoes', label:'Automações', hint:'gatilho → condição → acção → resultado', crop:'img/automacoes.png', box:[208,328,430,474]},
+  {id:'tarefas', label:'Tarefas', hint:'por fazer · em curso · concluído', crop:'img/tarefas.png', box:[688,74,898,238]},
+  {id:'projectos', label:'Projectos', hint:'progresso e estado', crop:'img/projectos.png', box:[776,214,978,356]},
+  {id:'assistente', label:'Assistente UANJI', hint:'conversa por voz e texto', crop:'img/assistente.png', box:[668,332,878,478]},
+].map(p => ({...p, rect: px(p.box)}));
+const row = [['espacos','Espaços','EYK · Q360 · Escolar · LGA'],['desempenho','Desempenho','ciclo · bloqueios · objectivos'],['github','GitHub','commits · PRs · issues'],['conhecimento','Conhecimento','notas e ligações'],['actividade','Actividade','o seu dia no Mac'],['definicoes','Definições','voz · tema · privacidade']];
+const extras = [{id:'comandos', label:'Comandos  ⌘K', hint:'procurar e executar', rect:{l:582,t:22,w:278,h:50}},
+  ...row.map((r,i) => ({id:r[0], label:r[1], hint:r[2], rect:{l:290+i*145, t:662, w:132, h:92}}))];
+const all = [...originals, ...extras];
+const F = {l:250, t:70, w:940, h:665};
+const stage = document.getElementById('stage'), flyer = document.getElementById('flyer'), crop = document.getElementById('crop');
+const hots = document.getElementById('hots');
+const place = (el, r) => Object.assign(el.style, {left:r.l+'px', top:r.t+'px', width:r.w+'px', height:r.h+'px'});
+for (const p of originals) {
+  const b = document.createElement('button'); b.type='button'; b.className='hot'; b.setAttribute('aria-label','Abrir '+p.label);
+  place(b, p.rect); b.onclick = () => openPanel(p); hots.appendChild(b);
+}
+for (const p of extras) {
+  const b = document.createElement('button'); b.type='button'; b.className='mini'; b.setAttribute('aria-label','Abrir '+p.label);
+  b.innerHTML = '<span class="dots" aria-hidden="true"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></span>'
+    + '<span style="display:block;font-weight:600;font-size:14px;margin-top:6px;color:#ffe2a8"></span><span style="display:block;font-size:11.5px;color:#d8b98a;margin-top:2px"></span>';
+  b.children[1].textContent = p.label; b.children[2].textContent = p.hint;
+  place(b, p.rect); b.onclick = () => openPanel(p); hots.appendChild(b);
+}
+let cur = null, busy = false;
+const fromT = r => `translate(${r.l-F.l}px, ${r.t-F.t}px) scale(${(r.w/F.w).toFixed(4)}, ${(r.h/F.h).toFixed(4)})`;
+function openPanel(p) {
+  if (busy || cur) return; busy = true; cur = p;
+  document.querySelectorAll('.detail').forEach(d => d.hidden = d.dataset.id !== p.id);
+  document.getElementById('dtitle').textContent = p.label;
+  document.getElementById('dhint').textContent = p.hint;
+  flyer.setAttribute('aria-label', p.label);
+  flyer.classList.toggle('nocrop', !p.crop);
+  crop.hidden = !p.crop; if (p.crop) crop.src = p.crop;
+  flyer.style.transition = 'none'; flyer.style.transform = fromT(p.rect); flyer.hidden = false;
+  stage.classList.add('open');
+  flyer.getBoundingClientRect();
+  flyer.style.transition = '';
+  requestAnimationFrame(() => { stage.classList.add('shown'); flyer.style.transform = 'none'; setTimeout(() => { busy = false; document.getElementById('closeBtn').focus(); }, 560); });
+}
+function closePanel() {
+  if (busy || !cur) return; busy = true;
+  stage.classList.remove('shown'); flyer.style.transform = fromT(cur.rect);
+  setTimeout(() => { stage.classList.remove('open'); flyer.hidden = true; cur = null; busy = false; }, 560);
+}
+document.getElementById('veil').onclick = closePanel;
+document.getElementById('closeBtn').onclick = closePanel;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+// Ajusta a cena ao tamanho da janela, mantendo as proporções da imagem.
+function fit() { const k = Math.min(innerWidth/1440, innerHeight/805); stage.style.transform = `scale(${k})`; }
+addEventListener('resize', fit); fit();
+// Abrir um painel pelo endereço, ex.: prototipo-interactivo.html#tarefas
+const want = all.find(p => '#' + p.id === location.hash);
+if (want) setTimeout(() => openPanel(want), 400);
+</script>
+</body>
+</html>
